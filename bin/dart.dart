@@ -1,37 +1,12 @@
-// void main() {
-//   var noodle = Menuitem('veg noodles', '100');
-//   var pizzaItem = pizza(['mashroom', 'papers'], 'veg pizza', '200');
-
-//   print(noodle.format());
-//   print(pizzaItem.format());
-// }
-
-// class Menuitem {
-//   String title;
-//   String price;
-
-//   Menuitem(this.title, this.price);
-//   String format() {
-//     return '$title --> $price';
-//   }
-// }
-
-// class pizza extends Menuitem {
-//   List<String> toppings;
-//   pizza(this.toppings, super.title, super.price);
-
-//   @override
-//   String format() {
-//     return '${super.format()} with toppings: ${toppings}';
-//   }
-// }
 import 'dart:io';
 
 void main() {
   List<String> tasks = [];
   print("Welcome to  ToDo App");
   while (true) {
-    print("Choose an option :\n1. Add Task\n2. View Tasks\n3. Exit");
+    print(
+      "Choose an option :\n1. Add Task\n2. View Tasks \n3. Delete task \n4. Exit",
+    );
     String? choice = stdin.readLineSync();
     if (choice == '1') {
       print('Enter the task:');
@@ -52,6 +27,18 @@ void main() {
         }
       }
     } else if (choice == '3') {
+      if (tasks.isEmpty) {
+        print('No tasks available to delete');
+      } else {
+        print('Enter the task number to delete:');
+        String? tasknumber = stdin.readLineSync();
+        int? index = int.tryParse(tasknumber ?? '');
+        if (index != null && index > 0 && index <= tasks.length) {
+          String removedTask = tasks.removeAt(index - 1);
+          print('Task $removedTask deleted successfully!');
+        }
+      }
+    } else if (choice == '4') {
       print('Exiting the app. Goodbye!');
       break;
     } else {
